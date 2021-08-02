@@ -13,7 +13,7 @@
                 </el-col>
                 <el-col :span="2">
                     <div class="grid-content bg-purple">
-                        <a class="loginout" href="#">退出</a>
+                        <a class="loginout" @click.prevent="handleSignout()" href="#">退出</a>
                     </div>
                 </el-col>
             </el-row>
@@ -21,7 +21,7 @@
         <el-container>
             <!-- 侧边栏 -->
             <el-aside class="aside" width="200px">
-                <el-menu>
+                <el-menu :unique-opened="true">
                 <!-- 1 -->
                 <el-submenu index="1">
                     <template slot="title">
@@ -40,12 +40,11 @@
                     <i class="el-icon-location"></i>
                     <span>权限管理</span>
                     </template>
-                    <!-- <template slot="title">分组一</template> -->
-                    <el-menu-item index="1-1">
+                    <el-menu-item index="2-1">
                          <i class="el-icon-menu"></i>
                          <span>角色列表</span>
                     </el-menu-item>
-                    <el-menu-item index="1-1">
+                    <el-menu-item index="2-2">
                          <i class="el-icon-menu"></i>
                          <span>权限列表</span>
                     </el-menu-item>
@@ -57,16 +56,15 @@
                     <i class="el-icon-location"></i>
                     <span>商品管理</span>
                     </template>
-                    <!-- <template slot="title">分组一</template> -->
-                    <el-menu-item index="1-1">
+                    <el-menu-item index="3-1">
                          <i class="el-icon-menu"></i>
                          <span>商品列表</span>
                     </el-menu-item>
-                    <el-menu-item index="1-1">
+                    <el-menu-item index="3-2">
                          <i class="el-icon-menu"></i>
                          <span>分类参数</span>
                     </el-menu-item>
-                    <el-menu-item index="1-1">
+                    <el-menu-item index="3-3">
                          <i class="el-icon-menu"></i>
                          <span>商品分类</span>
                     </el-menu-item>
@@ -77,8 +75,7 @@
                     <i class="el-icon-location"></i>
                     <span>订单管理</span>
                     </template>
-                    <!-- <template slot="title">分组一</template> -->
-                    <el-menu-item index="1-1">
+                    <el-menu-item index="4-1">
                          <i class="el-icon-menu"></i>
                          <span>订单列表</span>
                     </el-menu-item>
@@ -89,8 +86,7 @@
                     <i class="el-icon-location"></i>
                     <span>数据统计</span>
                     </template>
-                    <!-- <template slot="title">分组一</template> -->
-                    <el-menu-item index="1-1">
+                    <el-menu-item index="5-1">
                          <i class="el-icon-menu"></i>
                          <span>数据报表</span>
                     </el-menu-item>
@@ -105,7 +101,26 @@
 
 <script>
 export default{
-
+    // new Vue之前触发
+    beforeCreate(){
+        // 获取token
+        const token = localStorage.getItem('token')
+        if (!token) {
+            // token 没有--登录
+            this.$router.push({ name: 'login' })
+        }
+        // if token 有--渲染组件
+    },
+    methods:{
+        handleSignout(){
+            // 1、清除token
+            localStorage.clear()
+            // 2、提示
+            this.$message.success('退出成功')
+            // 3、来到login组件
+            this.$router.push({ name: 'login' })
+        }
+    }
 }
 </script>
 

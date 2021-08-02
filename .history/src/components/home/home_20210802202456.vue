@@ -13,7 +13,7 @@
                 </el-col>
                 <el-col :span="2">
                     <div class="grid-content bg-purple">
-                        <a class="loginout" href="#">退出</a>
+                        <a class="loginout" @click.prevent="handleSignout()" href="#">退出</a>
                     </div>
                 </el-col>
             </el-row>
@@ -109,7 +109,7 @@ export default{
             // token 没有--登录
             this.$router.push({ name: 'login' })
         }
-    // if token 有--渲染组件
+        // if token 有--渲染组件
     
     }
 }
