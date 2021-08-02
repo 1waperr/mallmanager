@@ -43,8 +43,6 @@ export default {
         if (status === 200) {
           // 登录成功
           // 0、保存token
-          // 如果用户没登录--url直接来到home组件
-          // 在登录成功时 保存正确用户的token
           localStorage.setItem('token',data.token)
           // 1、跳转home
           this.$router.push({name: 'home'})
