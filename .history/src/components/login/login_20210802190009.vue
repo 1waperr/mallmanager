@@ -37,20 +37,23 @@ export default {
       // ES7 async await(让异步操作 看起来像同步操作)
       const res =  await this.$http.post('login', this.formdata)
         
-      //   console.log(res)
-        const { data, meta: { msg, status } } = res.data
+        //   console.log(res)
+          const { data, meta: { msg, status } } = res.data
 
-        if (status === 200) {
-          // 登录成功
-          // 1、跳转home
-          this.$router.push({name: 'home'})
-          // 2、提示成功
-          this.$message.success(msg)
-        } else {
-          // 不成功
-          // 1、提示消息
-          this.$message.error(msg)
-        }
+          if (status === 200) {
+            // 登录成功
+            // 1、跳转home
+            this.$router.push({name: 'home'})
+            // 2、提示成功
+            this.$message.success(msg)
+          } else {
+            // 不成功
+            // 1、提示消息
+            this.$message.error(msg)
+          }
+        
+
+
 
       /* this.$http.post('login', this.formdata)
         .then((res) => {
