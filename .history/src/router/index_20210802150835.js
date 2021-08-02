@@ -7,9 +7,9 @@ import Login from '@/components/login/login.vue'
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
-    name: 'login',
-    path: '/login',
-    component: Login
-  }]
+    routes: [{
+        name: 'login',
+        path: '/login',
+        component: Login
+    }]
 })
