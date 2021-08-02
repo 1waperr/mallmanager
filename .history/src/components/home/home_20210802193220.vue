@@ -19,7 +19,6 @@
             </el-row>
         </el-header>
         <el-container>
-            <!-- 侧边 -->
             <el-aside class="aside" width="200px">Aside</el-aside>
             <el-main class="main">Main</el-main>
         </el-container>
