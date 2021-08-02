@@ -47,7 +47,7 @@ export default {
           } else {
             // 不成功
             // 1、提示消息
-            this.$message.console.warning(msg)
+            this.$message.console.warning(msg);
           }
         })
     }

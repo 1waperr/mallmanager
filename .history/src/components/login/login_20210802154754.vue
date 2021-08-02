@@ -13,9 +13,7 @@
       <el-form-item label="密码">
         <el-input v-model="formdata.password"></el-input>
       </el-form-item>
-      <el-button
-      @click.prevent="handleLogin()"
-      class="login-btn" type="primary">登录</el-button>
+      <el-button class="login-btn" type="primary">登录</el-button>
     </el-form>
   </div>
 </template>
@@ -29,38 +27,15 @@ export default {
         password: ''
       }
     }
-  },
-  methods: {
-    // 登录请求
-    handleLogin () {
-      this.$http.post('login', this.formdata)
-        .then((res) => {
-        //   console.log(res)
-          const { data, meta: { msg, status } } = res.data
-
-          if (status === 200) {
-            // 登录成功
-            // 1、跳转home
-            this.$router.push({name: 'home'})
-            // 2、提示成功
-            this.$message.success(msg)
-          } else {
-            // 不成功
-            // 1、提示消息
-            this.$message.console.warning(msg)
-          }
-        })
-    }
   }
 }
 </script>
 
 <style>
 .login-warp{
-    /* 最外层的div也要设置 height:100%; */
+    /* 最外层的div也要设置height:100%; */
     height: 100%;
     background-color: #324152;
-    /* 弹性盒布局 */
     display: flex;
     justify-content: center;
     align-items: center;

@@ -7,18 +7,15 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import '@/assets/css/reset.css'
-import MyServerHttp from '@/plugins/http.js'
-
 // 使用Vue插件
 Vue.use(ElementUI)
-Vue.use(MyServerHttp)
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    components: { App },
+    template: '<App/>'
 })

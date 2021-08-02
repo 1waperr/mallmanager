@@ -38,16 +38,14 @@ export default {
         //   console.log(res)
           const { data, meta: { msg, status } } = res.data
 
+          // 不成功
+          // 1、提示消息
           if (status === 200) {
             // 登录成功
             // 1、跳转home
             this.$router.push({name: 'home'})
             // 2、提示成功
             this.$message.success(msg)
-          } else {
-            // 不成功
-            // 1、提示消息
-            this.$message.console.warning(msg)
           }
         })
     }
