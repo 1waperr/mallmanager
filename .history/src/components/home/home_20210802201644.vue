@@ -101,17 +101,9 @@
 
 <script>
 export default{
-    // new Vue之前触发
-    beforeCreate(){
-        // 获取token
-        const token = localStorage.getItem('token')
-        if (!token) {
-            // token 没有--登录
-            this.$router.push({ name: 'login' })
-        }
-        // if token 有--渲染组件
-    
-    }
+    // 获取token
+    // if token 有--渲染组件
+    // token 没有--登录
 }
 </script>
 

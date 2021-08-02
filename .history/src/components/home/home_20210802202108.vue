@@ -109,7 +109,7 @@ export default{
             // token 没有--登录
             this.$router.push({ name: 'login' })
         }
-        // if token 有--渲染组件
+    // if token 有--渲染组件
     
     }
 }
