@@ -40,6 +40,7 @@
                     <i class="el-icon-location"></i>
                     <span>权限管理</span>
                     </template>
+                    <!-- <template slot="title">分组一</template> -->
                     <el-menu-item index="2-1">
                          <i class="el-icon-menu"></i>
                          <span>角色列表</span>
@@ -56,6 +57,7 @@
                     <i class="el-icon-location"></i>
                     <span>商品管理</span>
                     </template>
+                    <!-- <template slot="title">分组一</template> -->
                     <el-menu-item index="3-1">
                          <i class="el-icon-menu"></i>
                          <span>商品列表</span>
@@ -75,6 +77,7 @@
                     <i class="el-icon-location"></i>
                     <span>订单管理</span>
                     </template>
+                    <!-- <template slot="title">分组一</template> -->
                     <el-menu-item index="4-1">
                          <i class="el-icon-menu"></i>
                          <span>订单列表</span>
@@ -86,6 +89,7 @@
                     <i class="el-icon-location"></i>
                     <span>数据统计</span>
                     </template>
+                    <!-- <template slot="title">分组一</template> -->
                     <el-menu-item index="5-1">
                          <i class="el-icon-menu"></i>
                          <span>数据报表</span>
