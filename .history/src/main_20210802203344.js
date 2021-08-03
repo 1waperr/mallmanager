@@ -8,7 +8,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import '@/assets/css/reset.css'
 import MyServerHttp from '@/plugins/http.js'
-import moment from 'moment'
 
 // 使用Vue插件
 Vue.use(ElementUI)
@@ -16,15 +15,10 @@ Vue.use(MyServerHttp)
 
 Vue.config.productionTip = false
 
-// 全局过滤器--处理日期
-Vue.filter('fmtdate', (v) => {
-    return moment(v).format('YYYY-MM-DD')
-})
-
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    router,
-    components: { App },
-    template: '<App/>'
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
 })

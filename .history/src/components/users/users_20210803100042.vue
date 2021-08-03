@@ -23,7 +23,7 @@
       <el-table-column prop="username" label="姓名" width="100"> </el-table-column>
       <el-table-column prop="email" label="邮箱" width="160"> </el-table-column>
       <el-table-column prop="mobile" label="电话" width="140"> </el-table-column>
-      <el-table-column label="创建日期" width="160"> 
+      <el-table-column label="创建日期"> 
           <!-- 如果单元格内显示的内容不是字符串（文本）
             需要给被显示的内容外层包裹一个template
            -->
@@ -38,7 +38,7 @@
                  {{userlist.row.create_time | fmtdate}}
              </template>
       </el-table-column>
-      <el-table-column label="用户状态" width="160"> 
+      <el-table-column label="用户状态" width="160px"> 
         <template slot-scope="scope">
             <el-switch
               v-model="scope.row.mg_state"
@@ -48,11 +48,11 @@
         </template>
        
       </el-table-column>
-      <el-table-column prop="address" label="操作" width="200"> 
+      <el-table-column prop="address" label="操作"> 
         <template slot-scope="scope">
-            <el-button size="mini" type="primary" icon="el-icon-edit" plain circle></el-button>
-            <el-button size="mini" type="danger" icon="el-icon-delete" plain circle></el-button>
-            <el-button size="mini" type="success" icon="el-icon-check" plain circle></el-button>
+            <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            <el-button type="success" icon="el-icon-check" circle></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle></el-button>
         </template>
       </el-table-column>
     </el-table>

@@ -51,8 +51,8 @@
       <el-table-column prop="address" label="操作" width="200"> 
         <template slot-scope="scope">
             <el-button size="mini" type="primary" icon="el-icon-edit" plain circle></el-button>
-            <el-button size="mini" type="danger" icon="el-icon-delete" plain circle></el-button>
             <el-button size="mini" type="success" icon="el-icon-check" plain circle></el-button>
+            <el-button size="mini" type="danger" icon="el-icon-delete" plain circle></el-button>
         </template>
       </el-table-column>
     </el-table>

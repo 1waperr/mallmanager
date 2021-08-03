@@ -23,7 +23,7 @@
       <el-table-column prop="username" label="姓名" width="100"> </el-table-column>
       <el-table-column prop="email" label="邮箱" width="160"> </el-table-column>
       <el-table-column prop="mobile" label="电话" width="140"> </el-table-column>
-      <el-table-column label="创建日期" width="160"> 
+      <el-table-column prop="create_time" label="创建日期"> 
           <!-- 如果单元格内显示的内容不是字符串（文本）
             需要给被显示的内容外层包裹一个template
            -->
@@ -38,23 +38,14 @@
                  {{userlist.row.create_time | fmtdate}}
              </template>
       </el-table-column>
-      <el-table-column label="用户状态" width="160"> 
-        <template slot-scope="scope">
-            <el-switch
-              v-model="scope.row.mg_state"
-              active-color="#13ce66"
-              inactive-color="#ff4949">
-            </el-switch>
-        </template>
-       
+      <el-table-column prop="mg_state" label="用户状态"> 
+        <el-switch
+          v-model="value"
+          active-color="#13ce66"
+          inactive-color="#ff4949">
+        </el-switch>
       </el-table-column>
-      <el-table-column prop="address" label="操作" width="200"> 
-        <template slot-scope="scope">
-            <el-button size="mini" type="primary" icon="el-icon-edit" plain circle></el-button>
-            <el-button size="mini" type="danger" icon="el-icon-delete" plain circle></el-button>
-            <el-button size="mini" type="success" icon="el-icon-check" plain circle></el-button>
-        </template>
-      </el-table-column>
+      <el-table-column prop="address" label="操作"> </el-table-column>
     </el-table>
 
     <!-- 4、分页 -->
@@ -72,6 +63,7 @@ export default {
       total: -1,
       pagenum: 1,
       pagesize:2,
+
     }
   },
   created(){
