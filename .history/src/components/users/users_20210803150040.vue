@@ -195,7 +195,7 @@ export default {
       // 2、关闭对话框
       this.dialogFormVisibleAdd = false
 
-      const res = await this.$http.post(`users`, this.form)
+      const res = await this.$http.post('users', this.form)
       console.log(res)
       const {meta: {status, msg}, data} = res.data
       if (status === 201) {

@@ -195,7 +195,7 @@ export default {
       // 2、关闭对话框
       this.dialogFormVisibleAdd = false
 
-      const res = await this.$http.post(`users`, this.form)
+      const res = await this.$http.post('users', this.form)
       console.log(res)
       const {meta: {status, msg}, data} = res.data
       if (status === 201) {
@@ -223,24 +223,18 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(async() => {
-          // v 注意async的位置 它在离await最近的函数
           // 发送删除的请求：id---用户id
           // 1、data中找到userId
           // 2、把userId以showDeleUserMsgBox参数形式传进来
-          const res = await this.$http.delete(`users/${userId}`)
+          const res = await this.$http.delete('users/${userId}')
           console.log(res);
           if (res.data.meta.status === 200) {
-            // 页码回到第一页
-            this.pagenum = 1
-            // 提示
-            this.$message({
-              type: 'success',
-              message: res.data.meta.msg
-            });
-            // 更新视图
-            this.getUserList()
+            
           }
-          
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
         }).catch(() => {
           this.$message({
             type: 'info',

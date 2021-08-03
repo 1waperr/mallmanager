@@ -195,7 +195,7 @@ export default {
       // 2、关闭对话框
       this.dialogFormVisibleAdd = false
 
-      const res = await this.$http.post(`users`, this.form)
+      const res = await this.$http.post('users', this.form)
       console.log(res)
       const {meta: {status, msg}, data} = res.data
       if (status === 201) {
@@ -227,7 +227,7 @@ export default {
           // 发送删除的请求：id---用户id
           // 1、data中找到userId
           // 2、把userId以showDeleUserMsgBox参数形式传进来
-          const res = await this.$http.delete(`users/${userId}`)
+          const res = await this.$http.delete('users/${userId}')
           console.log(res);
           if (res.data.meta.status === 200) {
             // 页码回到第一页
