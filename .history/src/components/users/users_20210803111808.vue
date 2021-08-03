@@ -10,56 +10,85 @@
     <!-- 2、搜索 -->
     <el-row class="searchRow">
       <el-col>
-        <el-input @clear="loadUserlist()" placeholder="请输入内容" v-model="query" class="inputSearch" clearable>
-          <el-button @click.prevent="searchUser()"
-           slot="append" icon="el-icon-search"></el-button>
+        <el-input
+          @clear="loadUserlist()"
+          placeholder="请输入内容"
+          v-model="query"
+          class="inputSearch"
+          clearable
+        >
+          <el-button
+            @click.prevent="searchUser()"
+            slot="append"
+            icon="el-icon-search"
+          ></el-button>
         </el-input>
-        <el-button type="success" plain @click="showAddUserDia()">添加用户</el-button>
+        <el-button type="success" plain>添加用户</el-button>
       </el-col>
     </el-row>
 
     <!-- 3、表格 -->
     <el-table :data="userlist" style="width: 100%">
       <el-table-column type="index" label="#" width="60"> </el-table-column>
-      <el-table-column prop="username" label="姓名" width="100"> </el-table-column>
+      <el-table-column prop="username" label="姓名" width="100">
+      </el-table-column>
       <el-table-column prop="email" label="邮箱" width="160"> </el-table-column>
-      <el-table-column prop="mobile" label="电话" width="140"> </el-table-column>
+      <el-table-column prop="mobile" label="电话" width="140">
+      </el-table-column>
       <el-table-column label="创建日期" width="160">
-          <!-- 如果单元格内显示的内容不是字符串（文本）
+        <!-- 如果单元格内显示的内容不是字符串（文本）
             需要给被显示的内容外层包裹一个template
            -->
-           <!-- template内部要用数据 设置slot-scope属性
+        <!-- template内部要用数据 设置slot-scope属性
                 该属性的值是要用数据create_time的数据源userlist
             -->
-            <!--
+        <!-- 
                 slot-scope的值userlist其实就是el-table绑定的数据userlist
                 userlist.row---》数组中的每个对象
              -->
-             <template slot-scope="userlist">
-                 {{userlist.row.create_time | fmtdate}}
-             </template>
+        <template slot-scope="userlist">
+          {{ userlist.row.create_time | fmtdate }}
+        </template>
       </el-table-column>
       <el-table-column label="用户状态" width="160">
         <template slot-scope="scope">
-            <el-switch
-              v-model="scope.row.mg_state"
-              active-color="#13ce66"
-              inactive-color="#ff4949">
-            </el-switch>
+          <el-switch
+            v-model="scope.row.mg_state"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+          >
+          </el-switch>
         </template>
-
       </el-table-column>
       <el-table-column prop="address" label="操作" width="200">
         <template slot-scope="scope">
-            <el-button size="mini" type="primary" icon="el-icon-edit" plain circle></el-button>
-            <el-button size="mini" type="danger" icon="el-icon-delete" plain circle></el-button>
-            <el-button size="mini" type="success" icon="el-icon-check" plain circle></el-button>
+          <el-button
+            size="mini"
+            type="primary"
+            icon="el-icon-edit"
+            plain
+            circle
+          ></el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            icon="el-icon-delete"
+            plain
+            circle
+          ></el-button>
+          <el-button
+            size="mini"
+            type="success"
+            icon="el-icon-check"
+            plain
+            circle
+          ></el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <!-- 4、分页 -->
-    <!--
+    <!-- 
       该接口支持分页 url参数中有pagenum pagesize
       @size-change:每页显示条数变化时触发
       @current-change：当前页改变时 触发
@@ -75,122 +104,112 @@
       :page-sizes="[2, 4, 6, 8]"
       :page-size="2"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="total">
+      :total="total"
+    >
     </el-pagination>
 
     <!-- 对话框 -->
     <!-- 添加用户的对话框 -->
-    <el-dialog title="添加用户" :visible.sync="dialogFormVisibleAdd">
+    <!-- <el-dialog title="添加用户" :visible.sync="dialogFormVisibleAdd">
       <el-form :model="form">
-        <!-- required="true" 必填的五角星 -->
-        <el-form-item required="true" label="用户名" label-width="100px">
-          <el-input v-model="form.username" autocomplete="off"></el-input>
+        <el-form-item label="用户名" label-width="100px">
+          <el-input v-model="form.name" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item required="true" label="密 码" label-width="100px">
+        <el-form-item label="密 码" label-width="100px">
           <el-input v-model="form.password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" label-width="100px">
-          <el-input v-model="form.email" autocomplete="off"></el-input>
+          <el-input v-model="form.name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="电话" label-width="100px">
-          <el-input v-model="form.mobile" autocomplete="off"></el-input>
+          <el-input v-model="form.name" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisibleAdd = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisibleAdd = false">确 定</el-button>
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
       </div>
-    </el-dialog>
-
+    </el-dialog> -->
   </el-card>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      query: '',
-      // 表格绑定的数据
+      query: "",
+      //表格绑定的数据
       userlist: [],
-      // 分页相关的数据
+      //分页相关的数据
       total: -1,
       pagenum: 1,
       pagesize: 2,
       // 添加对话框的属性
       dialogFormVisibleAdd: false,
       // 添加用户的表单数据
-      form: {
-        username: '',
-        password: '',
-        email: '',
-        mobile: ''
-      }
-    }
+      from: "",
+    };
   },
-  created () {
-    this.getUserList()
+  created() {
+    this.getUserList();
   },
   methods: {
     //   获取用户列表的请求
-    async getUserList () {
+    async getUserList() {
       //   query 查询参数 可以为空
       // pagenum 当前页码 不能为空
       // pagesize 每页显示条数 不能为空
 
       // 需要授权的API 必须在请求头中使用 Authorization 字段提供token令牌
-      const AUTH_TOKEN = localStorage.getItem('token')
-      this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN
+      const AUTH_TOKEN = localStorage.getItem("token");
+      this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN;
 
       const res = await this.$http.get(
         `users?query=${this.query}&pagenum=${this.pagenum}
               &pagesize=${this.pagesize}
               `
-      )
-      console.log(res)
+      );
+      console.log(res);
       const {
         meta: { status, msg },
-        data: { users, total }
-      } = res.data
+        data: { users, total },
+      } = res.data;
       if (status === 200) {
         // 1、给表格数据赋值
-        this.userlist = users
+        this.userlist = users;
         // 2、给total赋值
-        this.total = total
+        this.total = total;
         // 3、提示
-        this.$message.success(msg)
+        this.$message.success(msg);
       } else {
         // 提示
-        this.$message.warning(msg)
+        this.$message.warning(msg);
       }
     },
     // 分页相关的方法
-    handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
       // 每页显示条数改变
-      this.pagesize = val
+      this.pagesize = val;
       // this.pagenum = 1
-      this.getUserList()
+      this.getUserList();
     },
-    handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
       // 页码改变时
-      this.pagenum = val
-      this.getUserList()
+      this.pagenum = val;
+      this.getUserList();
     },
     // 搜索用户
-    searchUser () {
-      this.getUserList()
+    searchUser() {
+      this.getUserList();
     },
     // 清空搜索框 重新获取数据
-    loadUserlist () {
-      this.getUserList()
+    loadUserlist() {
+      this.getUserList();
     },
-    // 添加用户
-    showAddUserDia () {
-      this.dialogFormVisibleAdd = true
-    }
-  }
-}
+  },
+};
 </script>
 
 <style>

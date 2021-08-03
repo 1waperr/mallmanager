@@ -18,13 +18,13 @@ Vue.config.productionTip = false
 
 // 全局过滤器--处理日期
 Vue.filter('fmtdate', (v) => {
-    return moment(v).format('YYYY-MM-DD')
+  return moment(v).format('YYYY-MM-DD')
 })
 
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    router,
-    components: { App },
-    template: '<App/>'
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
 })
