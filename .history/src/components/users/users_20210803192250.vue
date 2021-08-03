@@ -354,12 +354,10 @@ export default {
       // users/:id/role
       // :id 要修改的用户的id值
       // 请求体中 rid 修改的新值角色id
-      const res = await this.$http.put(`users/${this.currUserId}/role`,{
+      const res = await this.$http.put(`user/${this.currUserId}/role`,{
         rid:this.currRoleId
       })
       console.log(res);
-      // 关闭对话框
-      this.dialogFormVisibleRole = false
     }
   }
 }

@@ -139,7 +139,7 @@ export default{
     background-color: #b3c0d1;
 }
 .aside{
-    background-color: #fff;
+    background-color: #d3dce6;
 }
 .main{
     background-color: #e9eef3;

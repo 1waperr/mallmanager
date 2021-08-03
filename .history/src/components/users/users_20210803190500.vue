@@ -134,7 +134,7 @@
           <!-- 如果select的绑定的数据的值 和 option的value值一样 就会显示该option的label值 -->
           <el-select v-model="currRoleId">
             <el-option label="请选择" :value="-1" disabled></el-option>
-            <el-option :label="item.roleName" :value="item.id"
+            <el-option :label="item.rolename" :value="item.rid"
                 v-for="(item,i) in roles" :key="i">
 
             </el-option>
@@ -143,7 +143,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisibleRole = false">取 消</el-button>
-        <el-button type="primary" @click="setRole()">确 定</el-button>
+        <el-button type="primary" @click="dialogFormVisibleRole = false">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -174,10 +174,7 @@ export default {
       },
       // 分配角色
       currRoleId:-1,
-      // 当前用户id值
-      currUserId:-1,
       currUsername:'',
-      // 保存所有角色数据
       roles:[]
     }
   },
@@ -332,11 +329,9 @@ export default {
       )
       console.log(res)
     },
-    // 给用户分配角色--打开对话框
+    // 给用户分配角色
     async showSetUserRoleDia(user){
       this.currUsername = user.username
-      // 给currUserId赋值
-      this.currUserId = user.id
       // 获取所有的角色
       const res1 = await this.$http.get('roles')
       // console.log(res1);
@@ -345,21 +340,8 @@ export default {
       // 获取当前用户的角色id--rid
       const res = await this.$http.get(`users/${user.id}`)
       // console.log(res);
-      // 接口文档的key名 是role_id 其实是rid
       this.currRoleId = res.data.data.rid
       this.dialogFormVisibleRole = true
-    },
-    // 分配角色 -- 发送请求
-    async setRole(){
-      // users/:id/role
-      // :id 要修改的用户的id值
-      // 请求体中 rid 修改的新值角色id
-      const res = await this.$http.put(`users/${this.currUserId}/role`,{
-        rid:this.currRoleId
-      })
-      console.log(res);
-      // 关闭对话框
-      this.dialogFormVisibleRole = false
     }
   }
 }

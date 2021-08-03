@@ -174,10 +174,7 @@ export default {
       },
       // 分配角色
       currRoleId:-1,
-      // 当前用户id值
-      currUserId:-1,
       currUsername:'',
-      // 保存所有角色数据
       roles:[]
     }
   },
@@ -335,8 +332,6 @@ export default {
     // 给用户分配角色--打开对话框
     async showSetUserRoleDia(user){
       this.currUsername = user.username
-      // 给currUserId赋值
-      this.currUserId = user.id
       // 获取所有的角色
       const res1 = await this.$http.get('roles')
       // console.log(res1);
@@ -350,16 +345,11 @@ export default {
       this.dialogFormVisibleRole = true
     },
     // 分配角色 -- 发送请求
-    async setRole(){
+    setRole(){
       // users/:id/role
       // :id 要修改的用户的id值
       // 请求体中 rid 修改的新值角色id
-      const res = await this.$http.put(`users/${this.currUserId}/role`,{
-        rid:this.currRoleId
-      })
-      console.log(res);
-      // 关闭对话框
-      this.dialogFormVisibleRole = false
+      
     }
   }
 }

@@ -358,8 +358,6 @@ export default {
         rid:this.currRoleId
       })
       console.log(res);
-      // 关闭对话框
-      this.dialogFormVisibleRole = false
     }
   }
 }

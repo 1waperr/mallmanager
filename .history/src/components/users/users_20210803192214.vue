@@ -350,16 +350,11 @@ export default {
       this.dialogFormVisibleRole = true
     },
     // 分配角色 -- 发送请求
-    async setRole(){
+    setRole(){
       // users/:id/role
       // :id 要修改的用户的id值
       // 请求体中 rid 修改的新值角色id
-      const res = await this.$http.put(`users/${this.currUserId}/role`,{
-        rid:this.currRoleId
-      })
-      console.log(res);
-      // 关闭对话框
-      this.dialogFormVisibleRole = false
+      const res = await this.$http.put(`user/${this.currUserId}`)
     }
   }
 }
