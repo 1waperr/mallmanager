@@ -51,7 +51,7 @@
       </el-table-column>
       <el-table-column prop="address" label="操作" width="200">
         <template slot-scope="scope">
-            <el-button size="mini" type="primary" icon="el-icon-edit" plain circle></el-button>
+            <el-button @click="showEditUserDia()" size="mini" type="primary" icon="el-icon-edit" plain circle></el-button>
             <el-button @click="showDeleUserMsgBox(scope.row.id)" size="mini" type="danger" icon="el-icon-delete" plain circle></el-button>
             <el-button size="mini" type="success" icon="el-icon-check" plain circle></el-button>
         </template>
@@ -103,6 +103,27 @@
       </div>
     </el-dialog>
 
+     <!-- 编辑用户的对话框 -->
+    <el-dialog title="编辑用户" :visible.sync="dialogFormVisibleEdit">
+      <el-form :model="form">
+        <!-- required="true" 必填的五角星 -->
+        <el-form-item
+         label="用户名" label-width="100px">
+          <el-input v-model="form.username" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" label-width="100px">
+          <el-input v-model="form.email" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="电话" label-width="100px">
+          <el-input v-model="form.mobile" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisibleEdit = false">取 消</el-button>
+        <el-button type="primary" @click="addUser()">确 定</el-button>
+      </div>
+    </el-dialog>
+
   </el-card>
 </template>
 
@@ -119,6 +140,7 @@ export default {
       pagesize: 2,
       // 添加对话框的属性
       dialogFormVisibleAdd: false,
+      dialogFormVisibleEdit:false,
       // 添加用户的表单数据
       form: {
         username: '',
@@ -169,7 +191,7 @@ export default {
       console.log(`每页 ${val} 条`)
       // 每页显示条数改变
       this.pagesize = val
-      // this.pagenum = 1
+      this.pagenum = 1
       this.getUserList()
     },
     handleCurrentChange (val) {
@@ -247,6 +269,10 @@ export default {
             message: '已取消删除'
           });          
         });
+    },
+    // 编辑用户---显示对话框
+    showEditUserDia(){
+      this.dialogFormVisibleEdit = true
     }
   }
 }

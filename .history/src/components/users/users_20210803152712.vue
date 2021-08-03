@@ -51,8 +51,8 @@
       </el-table-column>
       <el-table-column prop="address" label="操作" width="200">
         <template slot-scope="scope">
-            <el-button size="mini" type="primary" icon="el-icon-edit" plain circle></el-button>
-            <el-button size="mini" type="danger" icon="el-icon-delete" plain circle></el-button>
+            <el-button @click="showEditUserDia()" size="mini" type="primary" icon="el-icon-edit" plain circle></el-button>
+            <el-button @click="showDeleUserMsgBox(scope.row.id)" size="mini" type="danger" icon="el-icon-delete" plain circle></el-button>
             <el-button size="mini" type="success" icon="el-icon-check" plain circle></el-button>
         </template>
       </el-table-column>
@@ -83,7 +83,7 @@
     <el-dialog title="添加用户" :visible.sync="dialogFormVisibleAdd">
       <el-form :model="form">
         <!-- required="true" 必填的五角星 -->
-        <el-form-item hide-required-asterisk="true"
+        <el-form-item
          label="用户名" label-width="100px">
           <el-input v-model="form.username" autocomplete="off"></el-input>
         </el-form-item>
@@ -99,6 +99,27 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisibleAdd = false">取 消</el-button>
+        <el-button type="primary" @click="addUser()">确 定</el-button>
+      </div>
+    </el-dialog>
+
+     <!-- 编辑用户的对话框 -->
+    <el-dialog title="编辑用户" :visible.sync="dialogFormVisibleEdit">
+      <el-form :model="form">
+        <!-- required="true" 必填的五角星 -->
+        <el-form-item
+         label="用户名" label-width="100px">
+          <el-input v-model="form.username" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" label-width="100px">
+          <el-input v-model="form.email" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="电话" label-width="100px">
+          <el-input v-model="form.mobile" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisibleEdit = false">取 消</el-button>
         <el-button type="primary" @click="addUser()">确 定</el-button>
       </div>
     </el-dialog>
@@ -119,6 +140,7 @@ export default {
       pagesize: 2,
       // 添加对话框的属性
       dialogFormVisibleAdd: false,
+      dialogFormVisibleEdit:false,
       // 添加用户的表单数据
       form: {
         username: '',
@@ -169,7 +191,7 @@ export default {
       console.log(`每页 ${val} 条`)
       // 每页显示条数改变
       this.pagesize = val
-      // this.pagenum = 1
+      this.pagenum = 1
       this.getUserList()
     },
     handleCurrentChange (val) {
@@ -195,7 +217,7 @@ export default {
       // 2、关闭对话框
       this.dialogFormVisibleAdd = false
 
-      const res = await this.$http.post('users', this.form)
+      const res = await this.$http.post(`users`, this.form)
       console.log(res)
       const {meta: {status, msg}, data} = res.data
       if (status === 201) {
@@ -215,6 +237,42 @@ export default {
       } else {
         this.$message.warning(msg)
       }
+    },
+    //删除用户--打开消息盒子 confirm
+    showDeleUserMsgBox(userId){
+      this.$confirm('删除用户?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(async() => {
+          // v 注意async的位置 它在离await最近的函数
+          // 发送删除的请求：id---用户id
+          // 1、data中找到userId
+          // 2、把userId以showDeleUserMsgBox参数形式传进来
+          const res = await this.$http.delete(`users/${userId}`)
+          console.log(res);
+          if (res.data.meta.status === 200) {
+            // 页码回到第一页
+            this.pagenum = 1
+            // 提示
+            this.$message({
+              type: 'success',
+              message: res.data.meta.msg
+            });
+            // 更新视图
+            this.getUserList()
+          }
+          
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
+    },
+    // 编辑用户---显示对话框
+    showEditUserDia(){
+      this.dialogFormVisibleEdit = true
     }
   }
 }
