@@ -70,7 +70,6 @@ export default {
               &pagesize=${this.pagesize}
               `
           )
-          console.log(res)
       }
   }
 }

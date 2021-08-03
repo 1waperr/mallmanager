@@ -51,26 +51,14 @@ export default {
       }]
     }
   },
-  created(){
-      this.getUserList()
-  },
   methods:{
     //   获取用户列表的请求
       async getUserList(){
-        //   query 查询参数 可以为空
-        // pagenum 当前页码 不能为空
-        // pagesize 每页显示条数 不能为空
-
-        // 需要授权的API 必须在请求头中使用 Authorization 字段提供token令牌
-        const AUTH_TOKEN = localStorage.getItem('token')
-        this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN
-
           const res = await this.$http.get(
               `users?query=${this.query}&pagenum=${this.pagenum}
               &pagesize=${this.pagesize}
               `
           )
-          console.log(res)
       }
   }
 }

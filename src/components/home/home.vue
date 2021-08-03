@@ -21,7 +21,7 @@
         <el-container>
             <!-- 侧边栏 -->
             <el-aside class="aside" width="200px">
-                <!-- 开启路由模式为true -->
+                <!-- 开启路由模式为true   :router="true" -->
                 <el-menu
                 :router="true"
                 :unique-opened="true">

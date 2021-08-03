@@ -21,7 +21,10 @@
         <el-container>
             <!-- 侧边栏 -->
             <el-aside class="aside" width="200px">
-                <el-menu :unique-opened="true">
+                <!-- 开启路由模式为true -->
+                <el-menu
+                :router="true"
+                :unique-opened="true">
                 <!-- 1 -->
                 <el-submenu index="1">
                     <template slot="title">
@@ -29,7 +32,7 @@
                     <span>用户管理</span>
                     </template>
                     <!-- <template slot="title">分组一</template> -->
-                    <el-menu-item index="1-1">
+                    <el-menu-item index="users">
                          <i class="el-icon-menu"></i>
                          <span>用户列表</span>
                     </el-menu-item>
@@ -48,7 +51,7 @@
                          <i class="el-icon-menu"></i>
                          <span>权限列表</span>
                     </el-menu-item>
-                    
+
                 </el-submenu>
                 <!-- 3 -->
                 <el-submenu index="3">
@@ -94,33 +97,37 @@
 
                 </el-menu>
             </el-aside>
-            <el-main class="main">Main</el-main>
+            <el-main class="main">
+                <router-view>
+
+                </router-view>
+            </el-main>
         </el-container>
     </el-container>
 </template>
 
 <script>
 export default{
-    // new Vue之前触发
-    beforeCreate(){
-        // 获取token
-        const token = localStorage.getItem('token')
-        if (!token) {
-            // token 没有--登录
-            this.$router.push({ name: 'login' })
-        }
-        // if token 有--渲染组件
-    },
-    methods:{
-        handleSignout(){
-            // 1、清除token
-            localStorage.clear()
-            // 2、提示
-            this.$message.success('退出成功')
-            // 3、来到login组件
-            this.$router.push({ name: 'login' })
-        }
+  // new Vue之前触发
+  beforeCreate () {
+    // 获取token
+    const token = localStorage.getItem('token')
+    if (!token) {
+      // token 没有--登录
+      this.$router.push({ name: 'login' })
     }
+    // if token 有--渲染组件
+  },
+  methods: {
+    handleSignout () {
+      // 1、清除token
+      localStorage.clear()
+      // 2、提示
+      this.$message.success('退出成功')
+      // 3、来到login组件
+      this.$router.push({ name: 'login' })
+    }
+  }
 }
 </script>
 
