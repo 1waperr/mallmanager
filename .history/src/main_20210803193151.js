@@ -9,9 +9,6 @@ import router from './router'
 import '@/assets/css/reset.css'
 import MyServerHttp from '@/plugins/http.js'
 import moment from 'moment'
-// 全局组件
-// MyBread 其实是组件选项所在的对象{templata:'',data...}
-import MyBread from '@/components/cuscom/myBread.vue'
 
 // 使用Vue插件
 Vue.use(ElementUI)
@@ -23,9 +20,6 @@ Vue.config.productionTip = false
 Vue.filter('fmtdate', (v) => {
   return moment(v).format('YYYY-MM-DD')
 })
-
-// 全局自定义组件
-Vue.component(MyBread.name, MyBread)
 
 /* eslint-disable no-new */
 new Vue({

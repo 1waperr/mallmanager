@@ -10,22 +10,22 @@ import Right from '@/components/rights/right.vue'
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
-    name: 'login',
-    path: '/login',
-    component: Login
-  }, {
-    name: 'home',
-    path: '/',
-    component: Home,
-    children: [{
-      name: 'users',
-      path: '/users',
-      component: Users
+    routes: [{
+        name: 'login',
+        path: '/login',
+        component: Login
     }, {
-      name: 'right',
-      path: '/rights',
-      component: Right
-    } ]
-  } ]
+        name: 'home',
+        path: '/',
+        component: Home,
+        children: [{
+            name: 'users',
+            path: '/users',
+            component: Users
+        }, {
+            name: 'right',
+            path: '/rights',
+            component: Right
+        }, ]
+    }, ]
 })

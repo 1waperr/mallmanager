@@ -10,7 +10,7 @@ import '@/assets/css/reset.css'
 import MyServerHttp from '@/plugins/http.js'
 import moment from 'moment'
 // 全局组件
-// MyBread 其实是组件选项所在的对象{templata:'',data...}
+// MyBread 其实是组件选项所在的对象{templata}
 import MyBread from '@/components/cuscom/myBread.vue'
 
 // 使用Vue插件
@@ -21,16 +21,24 @@ Vue.config.productionTip = false
 
 // 全局过滤器--处理日期
 Vue.filter('fmtdate', (v) => {
-  return moment(v).format('YYYY-MM-DD')
+    return moment(v).format('YYYY-MM-DD')
 })
 
 // 全局自定义组件
-Vue.component(MyBread.name, MyBread)
+Vue.component('my-bread', {
+    template: '',
+    data() {
+        return {
+            property: 'value',
+        };
+    },
+    props: []
+})
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    components: { App },
+    template: '<App/>'
 })
