@@ -12,7 +12,7 @@
 
     <!-- 3、表格 -->
     <el-table :data="rolelist" style="width: 100%">
-         <el-table-column type="expand" width="180"> 
+         <el-table-column type="expand" width="180">
              <template slot-scope="scope">
                  <!-- 展开一级权限 -->
                  <el-row v-for="(item1,i) in scope.row.children" :key="i">
@@ -66,7 +66,7 @@
             props 配置项{label，children}
                 label节点的文字标题和children节点的子节点
                 值都来源于data绑定的数据源中的该数据的key名 'label''children'
-            
+
             :default-expanded-keys="[2, 3]"
             :default-checked-keys="[5]"
          -->
@@ -87,50 +87,50 @@
 
 <script>
 export default {
-    data() {
-        return {
-            rolelist: [],
-            dialogFormVisibleRight:false,
-            // 树形结构的数据
-            treelist:[],
-            defaultProps:{
-                label:'authName',
-                children:'children'
-            }
-        };
-    },
-    created(){
-        this.getRolelist()
-    },
-    methods:{
-        // 展示权限列表
-        async getRolelist(){
-            const res = await this.$http.get('roles')
-            console.log(res);
-            this.rolelist = res.data.data
-        },
-        // 取消权限
-        async deleRole(role,rightId){
-            // roles/:roleId/rights/:rightId
-            // roleId 当前角色的id
-            // rightId 要删除的权限id
-            const res = await this.$http.delete(`roles/${role.id}/rights/${rightId}`)
-            console.log(res);
-            // 删除成功 返回了200的状态码和该角色的剩余权限
-            // 删除成功 更新视图
-            role.children = res.data.data
-            // this.getRolelist()
-        },
-        // 分配权限 - 打开对话框
-        async showSetRightDia(role){
-            // 获取树形结构的权限数据
-            const res = await this.$http.get('rights/tree')
-            console.log(res)
-            this.treelist = res.data.data
-            this.dialogFormVisibleRight = true
-        }
+  data () {
+    return {
+      rolelist: [],
+      dialogFormVisibleRight: false,
+      // 树形结构的数据
+      treelist: [],
+      defaultProps: {
+        label: 'authName',
+        children: 'children'
+      }
     }
-};
+  },
+  created () {
+    this.getRolelist()
+  },
+  methods: {
+    // 展示权限列表
+    async getRolelist () {
+      const res = await this.$http.get('roles')
+      console.log(res)
+      this.rolelist = res.data.data
+    },
+    // 取消权限
+    async deleRole (role, rightId) {
+      // roles/:roleId/rights/:rightId
+      // roleId 当前角色的id
+      // rightId 要删除的权限id
+      const res = await this.$http.delete(`roles/${role.id}/rights/${rightId}`)
+      console.log(res)
+      // 删除成功 返回了200的状态码和该角色的剩余权限
+      // 删除成功 更新视图
+      role.children = res.data.data
+      // this.getRolelist()
+    },
+    // 分配权限 - 打开对话框
+    async showSetRightDia (role) {
+      // 获取树形结构的权限数据
+      const res = await this.$http.get('rights/tree')
+      console.log(res)
+      this.treelist = res.data.data
+      this.dialogFormVisibleRight = true
+    }
+  }
+}
 </script>
 
 <style>

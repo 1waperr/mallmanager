@@ -11,26 +11,26 @@ import Role from '@/components/rights/role.vue'
 Vue.use(Router)
 
 export default new Router({
-    routes: [{
-        name: 'login',
-        path: '/login',
-        component: Login
+  routes: [{
+    name: 'login',
+    path: '/login',
+    component: Login
+  }, {
+    name: 'home',
+    path: '/',
+    component: Home,
+    children: [{
+      name: 'users',
+      path: '/users',
+      component: Users
     }, {
-        name: 'home',
-        path: '/',
-        component: Home,
-        children: [{
-            name: 'users',
-            path: '/users',
-            component: Users
-        }, {
-            name: 'right',
-            path: '/rights',
-            component: Right
-        }, {
-            name: 'role',
-            path: '/role',
-            component: Role
-        }]
+      name: 'right',
+      path: '/rights',
+      component: Right
+    }, {
+      name: 'role',
+      path: '/role',
+      component: Role
     }]
+  }]
 })

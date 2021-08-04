@@ -27,27 +27,27 @@
 
 <script>
 export default {
-    data() {
-        return {
-            rightlist: [],
-        };
-    },
-  created() {
-    this.getRightlist();
+  data () {
+    return {
+      rightlist: []
+    }
+  },
+  created () {
+    this.getRightlist()
   },
   methods: {
-    async getRightlist() {
+    async getRightlist () {
       /* // 需要授权的API 必须在请求头中使用 Authorization 字段提供token令牌
       const AUTH_TOKEN = localStorage.getItem('token')
       this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN
       */
       // type参数的值 list / tree
-      const res = await this.$http.get("rights/list");
-      console.log(res);
-      this.rightlist = res.data.data;
-    },
-  },
-};
+      const res = await this.$http.get('rights/list')
+      console.log(res)
+      this.rightlist = res.data.data
+    }
+  }
+}
 </script>
 
 <style>
