@@ -15,13 +15,6 @@ MyHttpServer.install = (Vue) => {
 
         console.log('拦截器被触发');
 
-        console.log(config.url);
-        if (config.url !== 'login') {
-            // 需要授权的API 必须在请求头中使用 Authorization 字段提供token令牌
-            const AUTH_TOKEN = localStorage.getItem('token')
-            config.headers['Authorization'] = AUTH_TOKEN
-        }
-
         // 在发送请求之前做些什么
         return config;
     }, function(error) {
@@ -37,6 +30,7 @@ MyHttpServer.install = (Vue) => {
         // 对响应错误做点什么
         return Promise.reject(error);
     });
+
 
     // 添加实例方法
     Vue.prototype.$http = axios

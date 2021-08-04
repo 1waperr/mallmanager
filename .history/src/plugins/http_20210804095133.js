@@ -19,7 +19,7 @@ MyHttpServer.install = (Vue) => {
         if (config.url !== 'login') {
             // 需要授权的API 必须在请求头中使用 Authorization 字段提供token令牌
             const AUTH_TOKEN = localStorage.getItem('token')
-            config.headers['Authorization'] = AUTH_TOKEN
+            config.headers['Authorization '] = AUTH_TOKEN
         }
 
         // 在发送请求之前做些什么

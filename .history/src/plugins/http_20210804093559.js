@@ -15,7 +15,7 @@ MyHttpServer.install = (Vue) => {
 
         console.log('拦截器被触发');
 
-        console.log(config.url);
+        console.log(config);
         if (config.url !== 'login') {
             // 需要授权的API 必须在请求头中使用 Authorization 字段提供token令牌
             const AUTH_TOKEN = localStorage.getItem('token')

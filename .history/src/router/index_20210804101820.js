@@ -27,10 +27,6 @@ export default new Router({
             name: 'right',
             path: '/rights',
             component: Right
-        }, {
-            name: 'role',
-            path: '/role',
-            component: Role
         }]
     }]
 })

@@ -10,7 +10,7 @@
     <my-bread level1="权限管理" level2="权限列表"></my-bread>
 
     <!-- 2、表格 -->
-    <el-table height="540" :data="rightlist" border style="width: 100%">
+    <el-table height="500" :data="rightlist" border style="width: 100%">
       <el-table-column type="index" label="#" width="100"> </el-table-column>
       <el-table-column prop="authName" label="权限名称" width="180"> </el-table-column>
       <el-table-column prop="path" label="路径"> </el-table-column>
