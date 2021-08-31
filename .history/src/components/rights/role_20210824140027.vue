@@ -57,7 +57,7 @@
     <!-- 修改权限的对话框 -->
     <el-dialog title="分配权限" :visible.sync="dialogFormVisibleRight">
         <!-- 树形结构
-        属性说明：
+        树形说明：
             data:数据源[]
             show-checkbox--选择框
             node-key -- 每个节点的唯一标识 通常是data数据源中key名id
@@ -69,23 +69,17 @@
 
             :default-expanded-keys="[2, 3]"
             :default-checked-keys="[5]"
-
-        默认展开所有
-        :default-expanded-keys="arrexpand"
-        default-expand-all
          -->
         <el-tree
-        ref="tree"
         :data="treelist"
         show-checkbox
         node-key="id"
-        default-expand-all
-        :default-checked-keys="arrcheck"
+        :default-expanded-keys="arrexpand"
         :props="defaultProps">
         </el-tree>
     <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisibleRight = false">取 消</el-button>
-        <el-button type="primary" @click="setRoleRight()">确 定</el-button>
+        <el-button type="primary" @click="dialogFormVisibleRight = false">确 定</el-button>
     </div>
     </el-dialog>
 
@@ -106,41 +100,12 @@ export default {
       },
       // 所有节点的id值
       arrexpand:[],
-      arrcheck:[],
-      currRoleId:-1
     }
   },
   created () {
     this.getRolelist()
   },
   methods: {
-    // 修改权限--发送请求
-    async setRoleRight(){
-      // roles/:roleId/rights
-      // roleId 当前要修改权限的角色
-
-      // rids 树形节点中 所有全选和半选的label的id
-      // 获取全选的id的数组 arr1 getCheckedKeys
-
-      // 1、给要操作的dom元素 设置ref属性值 input ref="txt"
-      // 2、this.$refa.ref属性值.js方法名() this.$refs.txt.focus()
-      let arr1 = this.$refs.tree.getCheckedKeys()
-      
-      // 获取半选的id的数据 arr2 getHalfCheckedKeys
-      let arr2 = this.$refs.tree.getHalfCheckedKeys()
-      // arr = arr1 + arr2
-      // arr1.concat(arr2)
-      // Es6 展开运算符 ...数组或者对象
-      let arr = [...arr1, ...arr2]
-      console.log(arr);
-
-      const res = await this.$http.post(`roles/${this.currRoleId}/rights`,
-      {rids:arr.join(',')})
-      // 更新视图
-      this.getRolelist()
-      // 关闭对话框
-      this.dialogFormVisibleRight = false
-    },
     // 展示权限列表
     async getRolelist () {
       const res = await this.$http.get('roles')
@@ -161,40 +126,10 @@ export default {
     },
     // 分配权限 - 打开对话框
     async showSetRightDia (role) {
-      // 给currRoleId赋值
-      this.currRoleId = role.id
       // 获取树形结构的权限数据
       const res = await this.$http.get('rights/tree')
       console.log(res)
       this.treelist = res.data.data
-
-        // :default-expanded-keys="arrexpand"
-     /* var arrtemp1 = []
-      this.treelist.forEach(item1 => {
-        arrtemp1.push(item1.id)
-        item1.children.forEach(item2 => {
-          arrtemp1.push(item2.id)
-          item2.children.forEach(item3 => {
-            arrtemp1.push(item3.id)
-          })
-        })
-      });
-      this.arrexpand = arrtemp1
-      */
-
-    //  获取当前角色role 的权限id
-      let arrtemp2 = []
-      role.children.forEach(item1 => {
-        arrtemp2.push(item1.id)
-        item1.children.forEach(item2 => {
-          arrtemp2.push(item2.id)
-          item2.children.forEach(item3 => {
-            arrtemp2.push(item3.id)
-          })
-        })
-      });
-      this.arrcheck = arrtemp2
-
       this.dialogFormVisibleRight = true
     }
   }

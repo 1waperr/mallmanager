@@ -8,8 +8,6 @@ import Users from '@/components/users/users.vue'
 import Right from '@/components/rights/right.vue'
 import Role from '@/components/rights/role.vue'
 
-import { Message, message } from 'element-ui'
-
 Vue.use(Router)
 
 const router = new Router({
@@ -50,17 +48,7 @@ router.beforeEach((to, from, next) => {
         // 如果要去的不是登录
         // 判断token
         const token = localStorage.getItem('token')
-        if (!token) {
-            // 如果没有token login
-            // 提示
-            Message.warning('回到登录页')
-            router.push({
-                name: 'login'
-            })
-            return
-        }
-        // 如果有token next
-        next()
+
     }
 })
 export default router

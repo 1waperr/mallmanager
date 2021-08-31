@@ -57,7 +57,7 @@
     <!-- 修改权限的对话框 -->
     <el-dialog title="分配权限" :visible.sync="dialogFormVisibleRight">
         <!-- 树形结构
-        属性说明：
+        树形说明：
             data:数据源[]
             show-checkbox--选择框
             node-key -- 每个节点的唯一标识 通常是data数据源中key名id

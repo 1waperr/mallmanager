@@ -57,7 +57,7 @@
     <!-- 修改权限的对话框 -->
     <el-dialog title="分配权限" :visible.sync="dialogFormVisibleRight">
         <!-- 树形结构
-        属性说明：
+        树形说明：
             data:数据源[]
             show-checkbox--选择框
             node-key -- 每个节点的唯一标识 通常是data数据源中key名id
@@ -120,13 +120,11 @@ export default {
       // roleId 当前要修改权限的角色
 
       // rids 树形节点中 所有全选和半选的label的id
-      // 获取全选的id的数组 arr1 getCheckedKeys
-
+      // 获取全选的id的数组 arr1
       // 1、给要操作的dom元素 设置ref属性值 input ref="txt"
       // 2、this.$refa.ref属性值.js方法名() this.$refs.txt.focus()
       let arr1 = this.$refs.tree.getCheckedKeys()
-      
-      // 获取半选的id的数据 arr2 getHalfCheckedKeys
+      // 获取半选的id的数据 arr2
       let arr2 = this.$refs.tree.getHalfCheckedKeys()
       // arr = arr1 + arr2
       // arr1.concat(arr2)
@@ -134,12 +132,7 @@ export default {
       let arr = [...arr1, ...arr2]
       console.log(arr);
 
-      const res = await this.$http.post(`roles/${this.currRoleId}/rights`,
-      {rids:arr.join(',')})
-      // 更新视图
-      this.getRolelist()
-      // 关闭对话框
-      this.dialogFormVisibleRight = false
+      // const res = await this.$http.post('roles/${this.currRoleId}/rights',{rids:?})
     },
     // 展示权限列表
     async getRolelist () {
