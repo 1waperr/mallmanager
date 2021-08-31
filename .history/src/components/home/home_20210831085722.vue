@@ -26,14 +26,13 @@
                 :router="true"
                 :unique-opened="true">
                 <!-- 1 -->
-                <el-submenu :index="''+item1.order" v-for="(item1,index) in menus" :key="index">
+                <el-submenu :index="''+item1.order" v-for="(item1,index) in meuns" :key="index">
                     <template slot="title">
                     <i class="el-icon-location"></i>
                     <span>{{item1.authName}}</span>
                     </template>
                     <!-- <template slot="title">分组一</template> -->
-                    <el-menu-item :index="item2.path"  
-                    v-for="(item2,index) in item1.children" :key="index">
+                    <el-menu-item :index="item2.path"  v-for="(item2,index) in item1.children" :key="index">
                          <i class="el-icon-menu"></i>
                          <span>{{item2.authName}}</span>
                     </el-menu-item>
@@ -54,17 +53,17 @@
 export default{
     data() {
         return {
-            menus:[]
+            meuns:[]
         };
     },
   // new Vue之前触发
   beforeCreate () {
     // 获取token
-    // const token = localStorage.getItem('token')
-    // if (!token) {
+    const token = localStorage.getItem('token')
+    if (!token) {
       // token 没有--登录
-    //   this.$router.push({ name: 'login' })
-    // }
+      this.$router.push({ name: 'login' })
+    }
     // if token 有--渲染组件
   },
   created(){
@@ -73,7 +72,7 @@ export default{
   methods: {
     //   获取导航数据
     async getMenus(){
-        const res = await this.$http.get(`menus`)
+        const res = await this.$http.get('menus')
         console.log(res)
         this.menus = res.data.data
     },

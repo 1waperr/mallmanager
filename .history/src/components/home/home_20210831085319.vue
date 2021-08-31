@@ -26,16 +26,15 @@
                 :router="true"
                 :unique-opened="true">
                 <!-- 1 -->
-                <el-submenu :index="''+item1.order" v-for="(item1,index) in menus" :key="index">
+                <el-submenu index="1">
                     <template slot="title">
                     <i class="el-icon-location"></i>
-                    <span>{{item1.authName}}</span>
+                    <span>用户管理</span>
                     </template>
                     <!-- <template slot="title">分组一</template> -->
-                    <el-menu-item :index="item2.path"  
-                    v-for="(item2,index) in item1.children" :key="index">
+                    <el-menu-item index="users">
                          <i class="el-icon-menu"></i>
-                         <span>{{item2.authName}}</span>
+                         <span>用户列表</span>
                     </el-menu-item>
                 </el-submenu>
 
@@ -54,27 +53,23 @@
 export default{
     data() {
         return {
-            menus:[]
+            meun:{},
         };
     },
   // new Vue之前触发
   beforeCreate () {
     // 获取token
-    // const token = localStorage.getItem('token')
-    // if (!token) {
+    const token = localStorage.getItem('token')
+    if (!token) {
       // token 没有--登录
-    //   this.$router.push({ name: 'login' })
-    // }
+      this.$router.push({ name: 'login' })
+    }
     // if token 有--渲染组件
-  },
-  created(){
-      this.getMenus()
   },
   methods: {
     //   获取导航数据
     async getMenus(){
-        const res = await this.$http.get(`menus`)
-        console.log(res)
+        const res = await this.$http.get('menus')
         this.menus = res.data.data
     },
     handleSignout () {

@@ -26,7 +26,7 @@
                 :router="true"
                 :unique-opened="true">
                 <!-- 1 -->
-                <el-submenu :index="''+item1.order" v-for="(item1,index) in menus" :key="index">
+                <el-submenu :index="item1.order" v-for="(item1,index) in meuns" :key="index">
                     <template slot="title">
                     <i class="el-icon-location"></i>
                     <span>{{item1.authName}}</span>
@@ -54,17 +54,17 @@
 export default{
     data() {
         return {
-            menus:[]
+            meuns:[]
         };
     },
   // new Vue之前触发
   beforeCreate () {
     // 获取token
-    // const token = localStorage.getItem('token')
-    // if (!token) {
+    const token = localStorage.getItem('token')
+    if (!token) {
       // token 没有--登录
-    //   this.$router.push({ name: 'login' })
-    // }
+      this.$router.push({ name: 'login' })
+    }
     // if token 有--渲染组件
   },
   created(){

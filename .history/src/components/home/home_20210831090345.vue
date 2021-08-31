@@ -60,11 +60,11 @@ export default{
   // new Vue之前触发
   beforeCreate () {
     // 获取token
-    // const token = localStorage.getItem('token')
-    // if (!token) {
+    const token = localStorage.getItem('token')
+    if (!token) {
       // token 没有--登录
-    //   this.$router.push({ name: 'login' })
-    // }
+      this.$router.push({ name: 'login' })
+    }
     // if token 有--渲染组件
   },
   created(){
