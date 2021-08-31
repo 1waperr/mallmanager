@@ -8,7 +8,6 @@ import Users from '@/components/users/users.vue'
 import Right from '@/components/rights/right.vue'
 import Role from '@/components/rights/role.vue'
 import Goodslist from '@/components/goods/goodslist.vue'
-import Goodsadd from '@/components/goods/goodsadd.vue'
 
 import { Message } from 'element-ui'
 
@@ -39,10 +38,6 @@ const router = new Router({
             name: 'goods',
             path: '/goods',
             component: Goodslist
-        }, {
-            name: 'goodsadd',
-            path: '/goodsadd',
-            component: Goodsadd
         }]
     }]
 })

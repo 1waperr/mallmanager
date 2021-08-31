@@ -41,7 +41,7 @@ const router = new Router({
             component: Goodslist
         }, {
             name: 'goodsadd',
-            path: '/goodsadd',
+            path: '/goods',
             component: Goodsadd
         }]
     }]

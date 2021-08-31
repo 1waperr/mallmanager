@@ -7,8 +7,7 @@ import Home from '@/components/home/home.vue'
 import Users from '@/components/users/users.vue'
 import Right from '@/components/rights/right.vue'
 import Role from '@/components/rights/role.vue'
-import Goodslist from '@/components/goods/goodslist.vue'
-import Goodsadd from '@/components/goods/goodsadd.vue'
+import Goodslist from '@/'
 
 import { Message } from 'element-ui'
 
@@ -35,14 +34,6 @@ const router = new Router({
             name: 'roles',
             path: '/roles',
             component: Role
-        }, {
-            name: 'goods',
-            path: '/goods',
-            component: Goodslist
-        }, {
-            name: 'goodsadd',
-            path: '/goodsadd',
-            component: Goodsadd
         }]
     }]
 })
