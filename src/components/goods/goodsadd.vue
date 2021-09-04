@@ -185,8 +185,24 @@ export default {
     async addGoods() {
       this.form.goods_cat = this.selectedOptions.join(",");
       // pics 在上传和移除图片时 进行赋值和删除 [].findIndex()
+
+      // attrs [{attr_id:?,attr_value:?}]
+      // 动态参数数组
+      let arr1 = this.arrDyparams.map(item =>{
+        return {attr_id:item.attr_id,attr_value:item.attr_vals}
+      })
+      // 静态参数数组
+      let arr2 = this.arrStaticparams.map(item =>{
+        return {attr_id:item.attr_id,attr_value:item.attr_vals}
+      })
+
+      this.form.attrs = [...arr1,...arr2]
+
       // 在发请求之前 处理this.form中的未处理的数据
       const res = await this.$http.post(`goods`, this.form);
+      console.log(res);
+      // 回到商品列表
+      this.$router.push({name:"goods"})
     },
     //   点击不同的tab时
     async tabChange() {

@@ -18,7 +18,12 @@
           ></el-button>
         </el-input>
         <!-- 编程式导航 $router.push({name:'goodsadd'}) -->
-        <el-button @click="$router.push({name:'goodsadd'})" type="success" plain>添加商品</el-button>
+        <el-button
+          @click="$router.push({ name: 'goodsadd' })"
+          type="success"
+          plain
+          >添加商品</el-button
+        >
       </el-col>
     </el-row>
 
@@ -44,7 +49,7 @@
 
       <el-table-column label="创建日期" width="120">
         <template slot-scope="scope">
-          {{ scope.row.add_time | fmtDate("YYYY-MM-DD") }}
+          {{ scope.row.add_time | fmtdate }}
         </template>
       </el-table-column>
 
@@ -99,7 +104,9 @@ export default {
       total: 0,
     };
   },
-
+  mounted() {
+    this.loadData();
+  },
   methods: {
     handleSizeChange(val) {
       // console.log(`每页 ${val} 条`)
@@ -121,7 +128,7 @@ export default {
       this.total = resData.data.total;
       this.list = resData.data.goods;
       this.loading = false;
-      // console.log(this.list)
+      console.log(this.list);
     },
   },
 };
